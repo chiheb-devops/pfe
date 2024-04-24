@@ -1,0 +1,37 @@
+<div class="content-wrapper">
+
+    <section class="content">
+
+      <div class="container-fluid">
+        <div style="padding-top: 50px !important;" class=" text-right mt-5">
+          <button routerLink="/admin/fournisseur/list-fournisseur" class="btn btn-success mr-2">
+            <i class="fas fa-arrow-alt-circle-left"></i> Retour
+          </button>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12 text-center mb-4">
+            <h1 class="edit-title" >Modifier un fournisseur</h1>
+          </div>
+            <div class="col-12 col-md-6 mx-auto">
+                <form  [formGroup]="FournisseurForm" (ngSubmit)="onSubmit()" >
+                    <div class="input-group mb-3">
+                        <input type="text" formControlName="nom_fournisseur" [ngClass]="{ 'is-invalid': submitted && f.nom_fournisseur.errors }" class="form-control" placeholder="Nom du Fournisseur">
+                        <div *ngIf="submitted && f.nom_fournisseur.errors" class="invalid-feedback">
+                          <div *ngIf="f.nom_fournisseur.errors.required">Nom du Fournisseur est obligatoire</div>
+
+                      </div>
+                      </div>
+                      <div class="row">
+
+                        <!-- /.col -->
+                        <div class="col-12 mb-4 text-center">
+                          <button  type="submit"  [nzLoading]="isLoading" nz-button nzType="primary" nzBlock>Enregistrer</button>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                  </form>
+            </div>
+        </div>
+      </div>
+  </section>
+</div>

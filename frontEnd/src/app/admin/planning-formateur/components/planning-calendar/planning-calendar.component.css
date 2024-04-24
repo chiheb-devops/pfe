@@ -1,0 +1,17 @@
+
+p {
+    font-size: .9rem;
+    font-weight: 370;
+  }
+  span {
+    font-weight: 400;
+  }
+  @media(max-width:768px) {
+    p {
+      font-size: .8rem;
+      }
+
+  }
+  ::ng-deep body .fc {
+    font-size: 1rem;
+  }

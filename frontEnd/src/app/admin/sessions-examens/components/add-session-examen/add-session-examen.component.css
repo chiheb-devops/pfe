@@ -1,0 +1,16 @@
+@media(max-width:768px) {
+  .add-title {
+    font-size: 2rem !important;
+    margin-top: 50px;
+    }
+    .form-control {
+      font-size: .8rem !important;
+    }
+}
+nz-select, nz-date-picker {
+
+  width: 100%;
+}
+.padding-custom {
+padding-bottom: 100px;
+}

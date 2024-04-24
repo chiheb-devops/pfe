@@ -1,0 +1,16 @@
+.cursor {
+    cursor: pointer;
+}
+.nav-treeview > .nav-item > .nav-link.active, [class*='sidebar-light-'] .nav-treeview > .nav-item > .nav-link.active:hover{
+  background-color: rgb(0 0 0 / 5%);
+}
+.exemp{
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #212529;
+}
+p, i {
+  font-size: .93rem !important;
+}
+i{
+  line-height: 21px;
+}

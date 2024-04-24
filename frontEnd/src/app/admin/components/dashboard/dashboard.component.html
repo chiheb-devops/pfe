@@ -1,0 +1,30 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row mb-4 pt-4">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Tableau de bord</h1>
+        </div><!-- /.col -->
+        <!-- /.col -->
+      </div>
+        <div *ngIf="roleAdmin !== 'Administrateur d\'utilisateurs'" class="pl-3 pt-3">
+          <nz-tabset nzSize="large" nzLinkRouter>
+            <nz-tab>
+              <a *nzTabLink nz-tab-link [routerLink]="['/admin/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Cours</a>
+            </nz-tab>
+            <nz-tab>
+              <a *nzTabLink nz-tab-link [routerLink]="['dashboard-examens']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Examens</a>
+            </nz-tab>
+            <nz-tab *ngIf="roleAdmin === 'Administrateur global'" >
+              <a *nzTabLink nz-tab-link [routerLink]="['dashboard-utilisateurs']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Utilisateurs</a>
+            </nz-tab>
+          </nz-tabset>
+        </div>
+
+
+
+    <router-outlet></router-outlet>
+    </div>
+    </section>
+</div>

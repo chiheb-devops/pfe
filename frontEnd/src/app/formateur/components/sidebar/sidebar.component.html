@@ -1,0 +1,61 @@
+<aside class="main-sidebar sidebar-light-primary elevation-4">
+  <!-- Brand Logo -->
+
+  <a  class="brand-link">
+    <img src="assets/img/linsoftLogo.png" alt="linSot Logo" class="brand-image img-circle elevation-3"
+    >
+    <span class="brand-text font-weight-light">LinSoft</span>  </a>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 text-center">
+
+      <div class="info">
+        <a  >{{user.prenom |titlecase}} {{user.nom |titlecase}}</a>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+             <li class="nav-item cursor">
+              <a   [routerLink]="['/formateur']" (click)="toggleSidebar()" routerLinkActive="exemp" [routerLinkActiveOptions]="{exact: true}" class="nav-link ">
+                <i class="nav-icon fas fa-tachometer-alt text-danger"></i>
+                <p>
+                  Tableau de bord
+
+                </p>
+              </a>
+            </li>
+            <li class="nav-item cursor">
+              <a   [routerLink]="['/formateur/training/feature-training']" (click)="toggleSidebar()" routerLinkActive="exemp" [routerLinkActiveOptions]="{exact: true}"  class="nav-link ">
+                <i class="nav-icon fas fa-calendar-check  text-danger"></i>
+                <p>
+                  Prochaines Sessions
+                </p>
+              </a>
+            </li>
+            <li class="nav-item cursor">
+              <a   [routerLink]="['/formateur/training/past-training']" (click)="toggleSidebar()" routerLinkActive="exemp" [routerLinkActiveOptions]="{exact: true}"  class="nav-link ">
+                <i class="nav-icon fas fa-calendar-plus text-danger"></i>
+                <p>
+                  Sessions Réalisées
+                </p>
+              </a>
+            </li>
+            <li class="nav-item cursor">
+              <a   [routerLink]="['/formateur/training/calendar-training']" (click)="toggleSidebar()" routerLinkActive="exemp" [routerLinkActiveOptions]="{exact: true}"  class="nav-link ">
+                <i class="nav-icon fas fa-calendar-alt text-danger"></i>
+                <p>
+                  Calendrier
+                </p>
+              </a>
+            </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

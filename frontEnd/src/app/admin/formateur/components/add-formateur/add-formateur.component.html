@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <div style="padding-top: 50px !important;" class=" text-right mt-5">
+    <button routerLink="/admin/formateur/list-formateur" class="btn btn-success mr-2">
+      <i class="fas fa-arrow-alt-circle-left"></i> Retour
+    </button>
+  </div>
+  <div class="row mb-2">
+    <div class="col-sm-12 text-center mb-4">
+      <h1 class="add-title" >Ajouter un instructeur</h1>
+    </div>
+      <div class="col-12 col-md-6 mx-auto">
+          <form  [formGroup]="FormateurForm" (ngSubmit)="onSubmit()" >
+              <div class="input-group mb-3">
+                  <input type="text" formControlName="nom" [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" class="form-control" placeholder="Prénom">
+
+                  <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+                    <div *ngIf="f.nom.errors.required">Prénom est obligatoire</div>
+                    <div *ngIf="f.nom.errors.trimError">Prénom est invalide</div>
+                    <div *ngIf="f.nom.errors.trimError2">Prénom est invalide</div>
+                </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="text" formControlName="prenom" [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }" class="form-control" placeholder="Nom">
+
+                  <div *ngIf="submitted && f.prenom.errors" class="invalid-feedback">
+                    <div *ngIf="f.prenom.errors.required">Nom est obligatoire</div>
+                    <div *ngIf="f.prenom.errors.trimError">Nom est invalide</div>
+                    <div *ngIf="f.prenom.errors.trimError2">Nom est invalide</div>
+                </div>
+                </div>
+              <div class="input-group mb-3">
+
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <span >@</span>
+                  </div>
+                </div>
+                <input type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="form-control" placeholder="Email">
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required">Email est obligatoire</div>
+                  <div *ngIf="f.email.errors.email">Email est invalide</div>
+                  <div *ngIf="f.email.errors.trimError">Email est invalide<</div>
+                  <div *ngIf="f.email.errors.trimError2">Email est invalide<</div>
+              </div>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <span class="fas fa-phone" ></span>
+                  </div>
+                </div>
+                  <input type="number" formControlName="tele"   [ngClass]="{ 'is-invalid': submitted && f.tele.errors }" class="form-control" placeholder="Téléphone">
+
+                  <div *ngIf="submitted && f.tele.errors" class="invalid-feedback">
+                    <div *ngIf="f.tele.errors.required">Téléphone est obligatoire</div>
+                </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="text" formControlName="fonction"   [ngClass]="{ 'is-invalid': submitted && f.fonction.errors }" class="form-control" placeholder="Fonction">
+
+                  <div *ngIf="submitted && f.fonction.errors" class="invalid-feedback">
+                    <div *ngIf="f.fonction.errors.required">Fonction est obligatoire</div>
+                    <div *ngIf="f.fonction.errors.trimError">Fonction est invalide</div>
+                    <div *ngIf="f.fonction.errors.trimError2">Fonction est invalide</div>
+                </div>
+                </div>
+
+                  <div class=" mb-3 form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="" formControlName="examinateur"  >
+                      Examinateur
+                    </label>
+                  </div>
+
+                <div class=" mb-3">
+                  <label for="exampleFormControlFile1">Certification</label> <br>
+                  <input type="file" name="file" #file  (change)="selectCertif(file.files)" multiple="multiple"  >
+
+                </div>
+                <div class=" mb-3">
+                  <label>CV</label> <br>
+                  <input type="file" name="cv" #cv (change)="selectcv(cv.files)" multiple="multiple"  >
+
+                </div>
+              <div class="row">
+
+                <!-- /.col -->
+                <div class="col-12 mb-4 text-center">
+                  <button  type="submit"  [nzLoading]="isLoading" nz-button nzType="primary" nzBlock>Enregistrer</button>
+                </div>
+                <!-- /.col -->
+              </div>
+            </form>
+      </div>
+  </div>
+</div>

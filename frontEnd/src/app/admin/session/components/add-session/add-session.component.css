@@ -1,0 +1,13 @@
+@media(max-width:768px) {
+  .add-title {
+    font-size: 2rem !important;
+    margin-top: 50px;
+    }
+    .form-control {
+      font-size: .8rem !important;
+    }
+}
+nz-select {
+  width: 100%;
+}
+

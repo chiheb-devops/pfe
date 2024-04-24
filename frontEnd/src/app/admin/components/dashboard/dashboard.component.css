@@ -1,0 +1,6 @@
+.card-title, .progress-group, .btn-tool {
+  font-size: .9rem !important;
+     }
+     .active {
+      font-weight: 550;
+    }

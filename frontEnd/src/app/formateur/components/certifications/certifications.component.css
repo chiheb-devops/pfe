@@ -1,0 +1,19 @@
+.lead {
+  font-size: .9rem;
+  font-weight: 300;
+}
+@media(max-width:768px) {
+  .lead {
+    font-size: .8rem;
+    }
+
+}.lead {
+  font-size: .9rem;
+  font-weight: 300;
+}
+@media(max-width:768px) {
+  .lead {
+    font-size: .8rem;
+    }
+
+}

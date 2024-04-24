@@ -1,0 +1,35 @@
+<div class="content-wrapper">
+
+    <section class="content">
+
+      <div class="container-fluid">
+        <div style="padding-top: 50px !important;" class=" text-right mt-5">
+            <button *ngIf="Result?.statut === 'active'" routerLink="/admin/list-cours-examen/cours/list-cours" class="btn btn-success mr-2">
+              <i class="fas fa-arrow-alt-circle-left"></i> Retour
+            </button>
+            <button *ngIf="Result?.statut !== 'active'" routerLink="/admin/list-cours-examen-inactive/cours/list-cours-inactive" class="btn btn-success mr-2">
+              <i class="fas fa-arrow-alt-circle-left"></i> Retour
+            </button>
+          </div>
+          <div class="row mb-2 mt-4">
+            <div class="col-12 col-sm-6 col-md-12 col-lg-12 ">
+                <div class="card bg-light">
+
+                  <div class="card-body pt-5">
+                    <div class="row">
+                      <div class="col-12">
+                        <p class="lead text-muted"> Référence:   <b>{{Result?.ref_form  }}</b>  </p>
+                        <p class="lead text-muted">Désignation:  <b> {{Result?.designation }}</b></p>
+                        <p class="lead text-muted">Catégorie:  <b>  {{Result?.categorie  }} </b></p>
+                        <p *ngIf="Result?.version" class="lead text-muted">Version:  <b> {{Result?.version }}</b></p>
+                        <p class="lead text-muted">Durée:  <b>  {{Result?.duree }} </b></p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+          </div>
+      </div>
+  </section>
+</div>

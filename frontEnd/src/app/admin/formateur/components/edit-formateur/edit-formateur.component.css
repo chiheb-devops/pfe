@@ -1,0 +1,10 @@
+@media(max-width:768px) {
+  .edit-title {
+    font-size: 2rem;
+    margin-top: 50px;
+    }
+    .form-control {
+      font-size: .8rem !important;
+    }
+
+}

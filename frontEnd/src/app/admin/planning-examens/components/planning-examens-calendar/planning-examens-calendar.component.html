@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <br>
+<div class="container">
+  <div class="modal " id="myModal" id="exampleModalScrollable" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalScrollableTitle" >{{ detail[0]?.ref_formation   }}</h4>
+          <button type="button" class="close" data-dismiss="modal" (click) = "hide()">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-10">
+              <p *ngIf="detail[0]?.version" class=" text-muted"> <span   >Version:</span> <b  > {{ detail[0]?.version }}</b></p>
+              <p  class=" text-muted"> <span   >Nom de l'examinateur:</span> <b  > {{ detail[0]?.name }}</b></p>
+              <p class=" text-muted"> <span   >Date:</span> <b  > {{ detail[0]?.date}}</b></p>
+              <p class="text-muted"><span  >Heure:</span>  <b> {{detail[0]?.heure }}</b> </p>
+              <p class="text-muted"> <span  >Statut d'examinateur: </span>  <b>  {{detail[0]?.statut_f   | titlecase }} </b></p>
+              <p class="text-muted"> <span  >Statut de session: </span>  <b>  {{detail[0]?.etat_session   | titlecase }} </b></p>
+              <p class="text-muted"> <span   >Langue: </span>  <b>  {{detail[0]?.langue   | titlecase }} </b></p>
+              <p *ngIf="detail[0]?.lieu" class="text-muted"><span  >Pays:</span>   <b>  {{detail[0]?.lieu   | titlecase }} </b></p>
+              <p class="text-muted"><span  >Nbr estimé des participants:</span>   <b>  {{detail[0]?.nbr_participant }} </b></p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click) = "hide()">Fermer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--end-->
+</div>
+  <full-calendar [options]="calendarOptions"></full-calendar>
+
+</div>

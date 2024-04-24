@@ -1,0 +1,103 @@
+<div class="content-wrapper">
+
+  <section class="content">
+
+    <div class="container-fluid">
+      <div style="padding-top: 50px !important;" class=" text-right mt-5">
+        <button routerLink="/admin/list-session-cours-examen/session-examen/list-examen" class="btn btn-success mr-2">
+          <i class="fas fa-arrow-alt-circle-left"></i> Retour
+        </button>
+      </div>
+      <div class="row mb-2 padding-custom">
+        <div class="col-sm-12 text-center mb-4">
+          <h1 class="add-title"  >Ajouter une session</h1>
+        </div>
+          <div class="col-12 col-md-6 mx-auto">
+              <form  [formGroup]="SessionForm" (ngSubmit)="onSubmit()" >
+                <div  class="input-group mb-3">
+                  <nz-select   nzPlaceHolder="Choisir une catégorie" (ngModelChange)="onchange($event)" [nzNotFoundContent]="'Pas de résultat'" formControlName="cat_formation" [ngClass]="{ 'is-invalid': submitted && f.cat_formation.errors }" >
+                    <nz-option *ngFor="let item of categories" nzLabel="{{item.nom_categorie}}" [nzValue]="item.nom_categorie"></nz-option>
+                  </nz-select>
+                  <div *ngIf="submitted && f.cat_formation.errors" class="invalid-feedback">
+                    <div *ngIf="f.cat_formation.errors.required">catégorie est obligatoire</div>
+                </div>
+                </div>
+
+                    <div *ngIf="displayRef" class="input-group mb-3">
+                      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Choisir une référence" (ngModelChange)="changeRef($event)" [nzNotFoundContent]="'Pas de résultat'" formControlName="ref_formation" [ngClass]="{ 'is-invalid': submitted && f.ref_formation.errors }" >
+                        <nz-option *ngFor="let item of cours" nzLabel="{{item.ref_form}}" [nzValue]="item.ref_form"></nz-option>
+                      </nz-select>
+                      <div *ngIf="submitted && f.ref_formation.errors" class="invalid-feedback">
+                        <div *ngIf="f.ref_formation.errors.required">Référence est obligatoire</div>
+                    </div>
+                    </div>
+                     <div *ngIf="displayVersion" class="input-group mb-3">
+                      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Choisir une version" [nzNotFoundContent]="'Pas de résultat'" formControlName="version_session" [ngClass]="{ 'is-invalid': submitted && f.version_session.errors }" >
+                        <nz-option *ngFor="let item_ses of versions" nzLabel="{{item_ses.version}}" [nzValue]="item_ses.version"></nz-option>
+                      </nz-select>
+                      <div *ngIf="submitted && f.version_session.errors" class="invalid-feedback">
+                        <div *ngIf="f.version_session.errors.required">version est obligatoire</div>
+                    </div>
+                    </div>
+                    <div class="input-group mb-3" >
+                      <nz-date-picker
+                      [nzShowTime]="{ nzFormat: 'HH:mm' }"
+                      [nzDisabledDate]="disabledDate"
+                      nzFormat="yyyy-MM-dd HH:mm"
+                      formControlName="date_debut"
+                      nzPlaceHolder="Date" [ngClass]="{ 'is-invalid': submitted && f.date_debut.errors }"
+
+                    ></nz-date-picker>
+                    <div *ngIf="submitted && f.date_debut.errors" class="invalid-feedback">
+                      <div *ngIf="f.date_debut.errors.required">Date est obligatoire</div>
+                  </div>
+                    </div>
+                    <div  class="input-group mb-3">
+                      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Choisir une langue" [nzNotFoundContent]="'Pas de résultat'" formControlName="langue" [ngClass]="{ 'is-invalid': submitted && f.langue.errors }" >
+                        <nz-option  nzLabel="Français" nzValue="français"></nz-option>
+                        <nz-option  nzLabel="Anglais" nzValue="anglais"></nz-option>
+                      </nz-select>
+                      <div *ngIf="submitted && f.langue.errors" class="invalid-feedback">
+                        <div *ngIf="f.langue.errors.required">langue est obligatoire</div>
+                    </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Choisir un pays" [nzNotFoundContent]="'Pas de résultat'" formControlName="lieu" [ngClass]="{ 'is-invalid': submitted && f.lieu.errors }" >
+                      <nz-option *ngFor="let item of countryList" nzLabel="{{item.name  |titlecase}}" [nzValue]="item.name"></nz-option>
+                    </nz-select>
+                    <div *ngIf="submitted && f.lieu.errors" class="invalid-feedback">
+                      <div *ngIf="f.lieu.errors.required">Pays est obligatoire</div>
+                  </div>
+                  </div>
+
+                    <div  class="input-group mb-3">
+                      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Choisir une statut de session" [nzNotFoundContent]="'Pas de résultat'" formControlName="etat_session" [ngClass]="{ 'is-invalid': submitted && f.etat_session.errors }" >
+                        <nz-option  nzLabel="En attente de confirmation" nzValue="en attente de confirmation"></nz-option>
+                        <nz-option  nzLabel="Confirmée" nzValue="confirmée"></nz-option>
+                        <nz-option  nzLabel="Reportée" nzValue="reportée"></nz-option>
+                        <nz-option  nzLabel="Annulée" nzValue="annulée"></nz-option>
+                      </nz-select>
+                      <div *ngIf="submitted && f.etat_session.errors" class="invalid-feedback">
+                        <div *ngIf="f.etat_session.errors.required">statut de session est obligatoire</div>
+                    </div>
+                    </div>
+                  <div class="row">
+
+                    <!-- /.col -->
+                    <div class="col-12 mb-4 text-center">
+                      <button  type="submit"  [nzLoading]="isLoading" nz-button nzType="primary" nzBlock>Enregistrer</button>
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                </form>
+
+          </div>
+      </div>
+    </div>
+</section>
+</div>
+
+
+
+

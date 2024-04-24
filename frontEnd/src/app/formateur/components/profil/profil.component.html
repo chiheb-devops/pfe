@@ -1,0 +1,36 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+
+      <div  class="col-12 mt-4 text-right">
+        <button  nz-button nzType="primary" (click)="showModal()"><span>Changer mot de passe</span></button>
+      </div>
+
+      <!--start modal-->
+<app-change-password ></app-change-password>
+<!--end modal-->
+      </div>
+      <div class="row">
+        <div class="col-md-5" >
+          <app-show-profil></app-show-profil>
+        </div>
+
+<div class="col-md-7 mt-5">
+  <nz-tabset nzSize="large" nzType="card" nzLinkRouter>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['certification']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Certifcations</a>
+    </nz-tab>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['cv']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Curriculum Vitae</a>
+    </nz-tab>
+
+  </nz-tabset>
+  <router-outlet></router-outlet>
+</div>
+
+</div>
+    </div>
+    </section>
+</div>

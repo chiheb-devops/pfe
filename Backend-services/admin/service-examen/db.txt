@@ -1,0 +1,14 @@
+CREATE TABLE `Examen` ( `id` int(11) NOT NULL AUTO_INCREMENT, `ref_form` varchar(250) NOT NULL,
+  `designation` varchar(250) NOT NULL,
+  `duree` TIME NOT NULL,
+  `version` varchar(250) DEFAULT NULL,
+  `categorie` varchar(250) NOT NULL,
+  `statut` varchar(250) DEFAULT 'active',
+  PRIMARY KEY (`id`),
+  KEY `Examen_fk` (`categorie`),
+  CONSTRAINT `Examen_fk` FOREIGN KEY (`categorie`) REFERENCES `Categories` (`nom_categorie`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+
+
+/************************/
+ALTER TABLE Examen MODIFY duree TIME NOT NULL;

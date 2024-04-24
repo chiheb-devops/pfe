@@ -1,0 +1,10 @@
+.lead {
+  font-size: 1rem;
+  font-weight: 300;
+}
+@media(max-width:768px) {
+  .lead {
+    font-size: .8rem;
+    }
+
+}

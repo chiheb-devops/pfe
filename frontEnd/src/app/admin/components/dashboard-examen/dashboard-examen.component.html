@@ -1,0 +1,245 @@
+<div class="container-fluid">
+  <!-- Small boxes (Stat box) -->
+  <div *ngIf="roleAdmin === 'Administrateur global' || roleAdmin === 'Administrateur d\'allocation' || roleAdmin === 'Administrateur des sessions de formations/examens'" >
+  <div  class="row pt-4">
+    <div *ngIf="tableReady" class="col-12 col-sm-6 col-md-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-copy"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Catégories</span>
+          <span class="info-box-number">{{numberCategory}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div *ngIf="tableReady" class="col-12 col-sm-6 col-md-3">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-book"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Examens</span>
+          <span class="info-box-number">{{numberCourse}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+
+    <!-- fix for small devices only -->
+    <div class="clearfix hidden-md-up"></div>
+
+    <div *ngIf="tableReady" class="col-12 col-sm-6 col-md-3">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-success elevation-1"><i class="fab fa-buromobelexperte"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Sessions</span>
+          <span class="info-box-number">{{numberSession}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div *ngIf="tableReady && roleAdmin !== 'Administrateur des sessions de formations/examens'" class="col-12 col-sm-6 col-md-3">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Examinateurs</span>
+          <span class="info-box-number">{{numberFormateur}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <nz-skeleton [nzActive]="true" [nzLoading]="verifDataReady"></nz-skeleton>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+   <!-- start for utilisateurs -->
+ <!-- Main row -->
+  <!-- end Utilisateurs -->
+  <!-- Main row -->
+  <div *ngIf="fixDataReady"  class="row alignself-global">
+    <div *ngFor="let item of test ; let i = index"  class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Rapport de récapitulation <strong >  {{item?.nomcategorie}}</strong></h5>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="row">
+            <div  class="col-md-6 px-3  dashbord-bottom border-right">
+              <div class="progress-group">
+                Nombre d'examens
+                <span class="float-right"><b>{{item?.numbercours}}</b></span>
+              </div>
+
+                <div class="progress-group">
+                  Nombre de sessions confirmées
+                  <span class="float-right"><b>{{item?.numbersesionconfirm}}</b></span>
+                </div>
+                <div class="progress-group">
+                  Nombre de sessions en attente de confirmation
+                  <span class="float-right"><b>{{item?.numbersesionwaiting}}</b></span>
+                </div>
+                <div class="progress-group">
+                  Nombre de sessions en cours
+                  <span class="float-right"><b>{{item?.numbersesionprogress}}</b></span>
+                </div>
+                  <div class="progress-group">
+                    Nombre de sessions clôturées
+                  <span class="float-right"><b>{{item?.numbersesionclose}}</b></span>
+                </div>
+                <div class="progress-group">
+                  Nombre de sessions reportées
+                  <span class="float-right"><b>{{item?.numbersesionreporter}}</b></span>
+                </div>
+                <div class="progress-group">
+                  Nombre de sessions annulées
+                  <span class="float-right"><b>{{item?.numbersesioncanceled}}</b></span>
+                </div>
+
+
+              <!-- /.chart-responsive -->
+            </div>
+            <div class="col-md-6 px-3  dashbord-bottom"  >
+              <div class="chart">
+
+                <div style="display: block;">
+                  <canvas baseChart style="height: 260px !important;"
+                    [data]="pieChartDat[i]"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    [options]="pieChartOptions"
+                    [plugins]="pieChartPlugins"
+                    [legend]="pieChartLegend">
+                  </canvas>
+                </div>
+
+              </div>
+            </div>
+            <!-- /.col -->
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- ./card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col -->
+  </div>
+</div>
+
+
+  <!-- start for administrateur de donnees -->
+  <div *ngIf="roleAdmin === 'Administrateur des données d\'information'" >
+    <div  class="row pt-4">
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-info elevation-1"><i class="fas fa-copy"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Catégories</span>
+            <span class="info-box-number">{{numberCategory}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div  class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-book"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Examens</span>
+            <span class="info-box-number">{{numberCourse}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+
+
+      <!-- /.col -->
+
+
+      <!-- /.col -->
+    </div>
+    <div *ngIf="forRoleAdmininstrateurDonnees"  class="row alignself-global">
+      <div   class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Rapport de récapitulation <strong>Catégories</strong></h5>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div  class="col-md-6 px-3  dashbord-bottom border-right">
+                <div *ngFor="let item of forRoleAdmininstrateurDonnees" class="progress-group">
+                  Nombre de cours <strong>{{item?.nomCategorie}}</strong>
+                  <span class="float-right"><b>{{item?.nombreCoure}}</b></span>
+                </div>
+                <!-- /.chart-responsive -->
+              </div>
+
+              <div class="col-md-6 px-3  dashbord-bottom"  >
+                <div class="chart">
+                  <div style="display: block;">
+                    <canvas  baseChart style="height: 260px !important;"
+
+                    [data]="pieChartDataDonnees"
+                      [labels]="pieChartLabelsDonnees"
+                      [chartType]="pieChartTypeDonnees"
+                      [options]="pieChartOptionsDonnees"
+                      [plugins]="pieChartPluginDonnees"
+                      [colors]="pieChartColors"
+                      [legend]="pieChartLegendDonnees">
+                    </canvas>
+                  </div>
+
+                </div>
+              </div>
+              <!-- /.col -->
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- ./card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+  </div>
+  <!-- end for administrateur de donnees -->
+</div><!-- /.container-fluid -->
+

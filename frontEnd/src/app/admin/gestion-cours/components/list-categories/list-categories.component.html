@@ -1,0 +1,65 @@
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="container">
+            <div class="text-right mt-5 mb-4" >
+              <button *ngIf="verifShowCategorie" routerLink="/admin/cours/add-categorie" class="btn btn-info ">
+                <i class="fas fa-plus"></i> Ajouter une catégorie
+              </button>
+            </div>
+            <h4 class="mb-5">Catégories Actives</h4>
+            <div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-inline mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+
+                      name="term"
+                      placeholder="Recherche"
+                      [(ngModel)]="term"
+                    />
+                  </div>
+                </div>
+              </div>
+                 <div>
+                  <nz-table *ngIf="tableReady" #nzTable [nzData]="listOfDisplayData |filter:term"   [nzPageSize]="10" [nzNoResult]="'Pas de résultat'" >
+                    <thead  >
+                      <tr  >
+                        <th nzAlign="center"  >Nom de la catégorie</th>
+                        <th nzAlign="center" *ngIf="verifShowCategorie"  >Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of nzTable.data">
+                    <td nzAlign="center"  >{{ data.nom_categorie}}</td>
+                    <td nzAlign="center"  *ngIf="verifShowCategorie" >
+                      <button
+                      [routerLink]="['/admin/cours/edit-categorie', data.id]"
+
+                        class="btn btn-warning text-white mr-2 btn-sm"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </button>
+
+                      <button (click)="deleteCategorie(data.id, data.nom_categorie)" class="btn btn-danger btn-sm">
+                        <i class="far fa-trash-alt"></i>
+                      </button>
+                    </td>
+                      </tr>
+                    </tbody>
+                  </nz-table>
+                  <nz-skeleton [nzActive]="true" [nzLoading]="verifDataReady"></nz-skeleton>
+            </div>
+            </div>
+        </div>
+      </div>
+
+      </div>
+
+    </div>
+  </section>
+</div>

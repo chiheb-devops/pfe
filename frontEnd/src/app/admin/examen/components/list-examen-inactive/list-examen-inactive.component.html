@@ -1,0 +1,70 @@
+<div style="padding-top: 50px !important;" class="row">
+  <div class="col-12">
+    <div class="container">
+
+      <h4 class="mb-5">Examens Inactifs</h4>
+      <div>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-inline mb-2">
+              <input
+                type="text"
+                class="form-control"
+
+                name="term"
+                placeholder="Search"
+                [(ngModel)]="term"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <nz-table *ngIf="tableReady" #nzTable [nzData]="listOfDisplayData |filter:term" [nzScroll]="{ x: '600px'}" [nzPageSize]="10" [nzNoResult]="'Pas de résultat'" nzTableLayout="fixed">
+            <thead>
+              <tr>
+                <th>Référence</th>
+                <th>Désignation</th>
+                <th>Catégorie</th>
+                <th>Version</th>
+                <th>Durée</th>
+                <th nzWidth="20%" >Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of nzTable.data">
+                <td>{{ data.ref_form  }}</td>
+                <td *ngIf="data.designation.length < 16" >{{ data.designation  }}</td>
+                <td *ngIf="data.designation.length > 16" >{{ (data.designation  | slice:0:16) + ' ...' }}</td>
+                <td>{{ data.categorie   }}</td>
+                <td>{{ data.version  }}</td>
+                <td>{{ data.duree  }}</td>
+                <td>
+                  <button
+                  [routerLink]="['/admin/examen/show-examen', data.id]"
+                    class="btn btn-primary mr-2 btn-sm">
+                    <i class="fas fa-info-circle"></i>
+                  </button>
+                  <button *ngIf="verifShowCategorie" (click)="CoursReturnActive(data.id)"
+                  class="btn btn-warning text-white btn-sm"
+                >
+                  <i class="fas fa-edit"></i>
+                </button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td><input [(ngModel)]="ref" (keyup)="searchRef()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="desig" (keyup)="searchDesig()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="categ" (keyup)="searchCateg()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="vers" (keyup)="searchVersion()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="duree" (keyup)="searchDuration()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+              </tr>
+            </tfoot>
+          </nz-table>
+          <nz-skeleton [nzActive]="true" [nzLoading]="verifDataReady"></nz-skeleton>
+      </div>
+      </div>
+  </div>
+</div>
+</div>

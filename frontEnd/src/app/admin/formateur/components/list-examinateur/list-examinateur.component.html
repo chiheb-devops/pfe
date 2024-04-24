@@ -1,0 +1,67 @@
+<div style="padding-top: 50px !important;" class="row">
+  <div class="col-12">
+    <div class="container">
+      <h4 class="mb-5 text-dark">Examinateurs Actifs</h4>
+      <div>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-inline mb-2">
+
+              <input
+                type="text"
+                class="form-control"
+
+                name="term"
+                placeholder="Recherche"
+                [(ngModel)]="term"
+              />
+            </div>
+          </div>
+        </div>
+        <div >
+          <nz-table *ngIf="tableReady" #nzTable [nzData]="listOfDisplayData |filter:term" [nzScroll]="{ x: '800px'}" [nzPageSize]="10" [nzNoResult]="'Pas de résultat'" nzTableLayout="fixed">
+            <thead>
+              <tr>
+                <th>
+                  Prénom
+                </th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th nzWidth="20%" >Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of nzTable.data">
+            <td>{{ data.nom  }}</td>
+            <td>{{ data.prenom }}</td>
+            <td>{{ data.email }}</td>
+            <td>{{ data.tele }}</td>
+            <td>
+              <button
+              [routerLink]="['/admin/formateur/show-examinateur', data.id]"
+                class="btn btn-primary mr-2 btn-sm"
+              >
+                <i class="fas fa-info-circle"></i>
+              </button>
+              <button (click)="deleteExaminateur(data.id)" class="btn btn-danger btn-sm">
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td><input [(ngModel)]="firstname" (keyup)="searchFirstName()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="lasttname" (keyup)="searchLasttName()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="email" (keyup)="searchEmail()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="tele" (keyup)="searchTele()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+              </tr>
+            </tfoot>
+          </nz-table>
+          <nz-skeleton [nzActive]="true" [nzLoading]="verifDataReady"></nz-skeleton>
+        </div>
+      </div>
+  </div>
+</div>
+</div>

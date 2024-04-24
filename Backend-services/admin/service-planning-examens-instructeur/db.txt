@@ -1,0 +1,14 @@
+CREATE TABLE `Planning_Examinateur` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_examinateur` int(11) DEFAULT NULL,
+  `statut_f` varchar(250) NOT NULL,
+  `id_session` int(11) NOT NULL,
+  `nbr_participant` varchar(250) NOT NULL,
+  `statut` varchar(250) DEFAULT 'active',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_session` (`id_session`),
+  KEY `planning_fk_id_examinateur` (`id_examinateur`),
+  CONSTRAINT `planning_fk_id_examinateur` FOREIGN KEY (`id_examinateur`) REFERENCES `Utilisateurs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `planning_ex_fk_session_id` FOREIGN KEY (`id_session`) REFERENCES `Session_Examen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+

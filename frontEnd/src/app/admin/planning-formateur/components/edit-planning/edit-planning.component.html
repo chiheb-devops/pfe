@@ -1,0 +1,204 @@
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid">
+      <div style="padding-top: 50px !important" class="text-right mt-5">
+        <button routerLink="/admin/list-planning-cours-examen/planning-cours/list-planning-cours" class="btn btn-success mr-2">
+          <i class="fas fa-arrow-alt-circle-left"></i> Retour
+        </button>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-12 text-center mb-4">
+          <h1 class="edit-title">Modifier une allocation d'instructeur</h1>
+        </div>
+        <div class="col-12 col-md-6 mx-auto">
+          <form [formGroup]="PlanningForm" (ngSubmit)="onSubmit()">
+            <div class="input-group mb-3">
+              <nz-select nzPlaceHolder="Choisir une catégorie" [nzNotFoundContent]="'Pas de résultat'"
+                formControlName="cat_formation" [ngClass]="{
+                  'is-invalid': submitted && f.cat_formation.errors
+                }">
+                <nz-option nzLabel="{{ Result?.categorie }}" [nzValue]="Result?.categorie"></nz-option>
+              </nz-select>
+              <div *ngIf="submitted && f.cat_formation.errors" class="invalid-feedback">
+                <div *ngIf="f.cat_formation.errors.required">
+                  catégorie est obligatoire
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <nz-select nzPlaceHolder="Choisir une référence" [nzNotFoundContent]="'Pas de résultat'"
+                formControlName="ref_formation" [ngClass]="{
+                  'is-invalid': submitted && f.ref_formation.errors
+                }">
+                <nz-option nzLabel="{{ Result?.ref_formation }}" [nzValue]="Result?.ref_formation"></nz-option>
+              </nz-select>
+              <div *ngIf="submitted && f.ref_formation.errors" class="invalid-feedback">
+                <div *ngIf="f.ref_formation.errors.required">
+                  Référence est obligatoire
+                </div>
+              </div>
+            </div>
+            <div *ngIf="displayVersion" class="input-group mb-3">
+              <nz-select nzPlaceHolder="Choisir une version" [nzNotFoundContent]="'Pas de résultat'"
+                formControlName="version_formation">
+                <nz-option nzLabel="{{ Result?.version }}" [nzValue]="Result?.version"></nz-option>
+              </nz-select>
+            </div>
+
+            <div class="input-group mb-3">
+              <nz-select nzPlaceHolder="Choisir un type" [nzNotFoundContent]="'Pas de résultat'"
+                formControlName="type_formation">
+                <nz-option nzLabel="{{ Result?.type | titlecase }}" [nzValue]="Result?.type"></nz-option>
+              </nz-select>
+            </div>
+
+            <div class="input-group mb-3">
+              <nz-select nzPlaceHolder="Choisir un pays" [nzNotFoundContent]="'Pas de résultat'"
+                formControlName="lieu_formation">
+                <nz-option nzLabel="{{ Result?.lieu | titlecase }}" [nzValue]="Result?.lieu"></nz-option>
+              </nz-select>
+            </div>
+
+            <div class="input-group mb-3">
+              <nz-select nzPlaceHolder="Choisir une date" [nzNotFoundContent]="'Pas de résultat'"
+                formControlName="date_formation" [ngClass]="{
+                  'is-invalid': submitted && f.date_formation.errors
+                }">
+                <nz-option nzLabel="{{ Result?.date_formation }}" nzValue="{{ Result?.date_formation }}"></nz-option>
+              </nz-select>
+              <div *ngIf="submitted && f.date_formation.errors" class="invalid-feedback">
+                <div *ngIf="f.date_formation.errors.required">
+                  date est obligatoire
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <nz-select nzShowSearch nzPlaceHolder="Choisir nom de l'instructeur" (ngModelChange)="getEmail($event)"
+                [nzNotFoundContent]="'Pas de résultat'" formControlName="name"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                <nz-option nzLabel="{{ Result?.name }}" [nzValue]="Result?.name"></nz-option>
+                <nz-option nzCustomContent *ngFor="let item of dataFormateurFil" [nzDisabled]="item.reserved"
+                  nzLabel="{{ item.nom }} {{ item.prenom }}" nzValue="{{ item.id }}">
+                  <span nz-tooltip nzTooltipPlacement="right" [nzTooltipTitle]="item.reserved ? item.reserved : ''">
+                    {{ item.nom }} {{ item.prenom }}
+                  </span>
+                </nz-option>
+              </nz-select>
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">
+                  nom de l'instructeur est obligatoire
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <nz-select nzAllowClear nzPlaceHolder="Choisir statut d'instructeur"
+                [nzNotFoundContent]="'Pas de résultat'" formControlName="statut_f"
+                [ngClass]="{ 'is-invalid': submitted && f.statut_f.errors }">
+                <nz-option nzLabel="En attente de confirmation" nzValue="En attente de confirmation"></nz-option>
+                <nz-option nzLabel="Confirmée" nzValue="Confirmée"></nz-option>
+                <nz-option nzLabel="Annulée" nzValue="annulée"></nz-option>
+              </nz-select>
+              <div *ngIf="submitted && f.statut_f.errors" class="invalid-feedback">
+                <div *ngIf="f.statut_f.errors.required">
+                  statut d'instructeur est obligatoire
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Choisir un fournisseur"
+                (ngModelChange)="onchangeFournisseur($event)" [nzNotFoundContent]="'Pas de résultat'"
+                formControlName="nom_four" [ngClass]="{ 'is-invalid': submitted && f.nom_four.errors }">
+                <nz-option *ngFor="let item_four of fournisseur" nzLabel="{{ item_four.nom_fournisseur }}"
+                  [nzValue]="item_four.nom_fournisseur"></nz-option>
+              </nz-select>
+              <div *ngIf="submitted && f.nom_four.errors" class="invalid-feedback">
+                <div *ngIf="f.nom_four.errors.required">
+                  Nom du fournisseur est obligatoire
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <textarea nz-input placeholder="Addresse" formControlName="address_four"
+                [ngClass]="{ 'is-invalid': submitted && f.address_four.errors }"
+                [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+              <div *ngIf="submitted && f.address_four.errors" class="invalid-feedback">
+                <div *ngIf="f.address_four.errors.required">
+                  addresse est obligatoire
+                </div>
+                <div *ngIf="f.address_four.errors.trimError">
+                  addresse est invalide
+                </div>
+                <div *ngIf="f.address_four.errors.trimError2">
+                  addresse est invalide
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <input nz-input placeholder="Contact" formControlName="contact_for"
+                [ngClass]="{ 'is-invalid': submitted && f.contact_for.errors }" />
+              <div *ngIf="submitted && f.contact_for.errors" class="invalid-feedback">
+                <div *ngIf="f.contact_for.errors.required">
+                  Contact est obligatoire
+                </div>
+                <div *ngIf="f.contact_for.errors.trimError">
+                  Contact est invalide
+                </div>
+                <div *ngIf="f.contact_for.errors.trimError2">
+                  Contact est invalide
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <input nz-input placeholder="Numéro du contact" formControlName="numero_for"
+                [ngClass]="{ 'is-invalid': submitted && f.numero_for.errors }" />
+              <div *ngIf="submitted && f.numero_for.errors" class="invalid-feedback">
+                <div *ngIf="f.numero_for.errors.required">
+                  Numéro du contact est obligatoire
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <input nz-input placeholder="Mail du contact" formControlName="mail_contact"
+                [ngClass]="{ 'is-invalid': submitted && f.mail_contact.errors }" />
+              <div *ngIf="submitted && f.mail_contact.errors" class="invalid-feedback">
+                <div *ngIf="f.mail_contact.errors.required">
+                  Mail du contact est obligatoire
+                </div>
+                <div *ngIf="f.mail_contact.errors.trimError">
+                  Mail du contact est invalide
+                </div>
+                <div *ngIf="f.mail_contact.errors.trimError2">
+                  Mail du contact est invalide
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <input nz-input placeholder="Nombre estimé des participants" formControlName="nbr_participant" [ngClass]="{
+                  'is-invalid': submitted && f.nbr_participant.errors
+                }" />
+              <div *ngIf="submitted && f.nbr_participant.errors" class="invalid-feedback">
+                <div *ngIf="f.nbr_participant.errors.required">
+                  Nombre estimé des participants est obligatoire
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- /.col -->
+              <div class="col-12 mb-4 text-center">
+                <button  type="submit"  [nzLoading]="isLoading" nz-button nzType="primary" nzBlock>Enregistrer</button>
+              </div>
+              <!-- /.col -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

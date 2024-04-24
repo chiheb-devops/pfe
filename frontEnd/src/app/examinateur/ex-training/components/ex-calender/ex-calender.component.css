@@ -1,0 +1,14 @@
+.ng-star-inserted {
+  color: #212529;
+  font-weight: 200;
+}
+::ng-deep .ant-tabs-tab{
+  background-color: transparent !important;
+}
+::ng-deep .ant-tabs-tab-active{
+  background-color: #17a2b8 !important;
+}
+.active {
+  color: #fff;
+  font-weight: 500;
+}

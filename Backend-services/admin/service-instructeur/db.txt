@@ -1,0 +1,1 @@
+ALTER TABLE Utilisateurs ADD COLUMN examinateur varchar(250) DEFAULT 'non';

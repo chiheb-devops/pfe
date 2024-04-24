@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-12">
+    <div class="container mt-5 mb-4">
+      <div *ngIf="role !== 'Administrateur d\'allocation'" class="text-right">
+        <button routerLink="/admin/session/add-session" class="btn btn-info ">
+          <i class="fas fa-plus"></i> Ajouter une session
+        </button>
+      </div>
+      <h4 class="mb-5">Prochaines Sessions</h4>
+      <div>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-inline mb-2">
+              <input
+                type="text"
+                class="form-control"
+                name="term"
+                placeholder="Recherche"
+                [(ngModel)]="term"
+              />
+            </div>
+          </div>
+        </div>
+        <div >
+          <nz-table  *ngIf="tableReady" #nzTable [nzData]="listOfDisplayData |filter:term" [nzScroll]="{ x: '1200px'}" [nzPageSize]="10" [nzNoResult]="'Pas de résultat'" nzTableLayout="fixed">
+            <thead>
+              <tr>
+                <th>Référence</th>
+                <th>Version</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Type</th>
+                <th>Langue</th>
+                <th>Pays</th>
+                <th>Statut de session</th>
+                <th>Instructeur</th>
+                <th nzWidth="13%" >Actions </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let data of nzTable.data">
+                <td>{{ data.ref_form }}</td>
+                <td>{{ data.version }}</td>
+                <td>{{ data.date_debut }}</td>
+                <td>{{ data.date_fin   }}</td>
+                <td>{{ data.type   | titlecase }}</td>
+                <td>{{ data.langue   | titlecase }}</td>
+                <td>{{ data.lieu   | titlecase }}</td>
+                <td>{{ data.etat_session   | titlecase }}</td>
+                <td *ngIf="data.affecter" >{{ data.name }}</td>
+                <td *ngIf="!data.affecter" class="text-center" ><i class="fas fa-times text-warning"></i></td>
+                  <td>
+                    <button
+                  [routerLink]="['/admin/session/show-session', data.id]"
+                    class="btn btn-primary mr-2 btn-sm"
+                  >
+                    <i class="fas fa-info-circle"></i>
+                  </button>
+                    <button *ngIf="role !== 'Administrateur d\'allocation'"
+                    [routerLink]="['/admin/session/edit-session', data.id]"
+
+                      class="btn btn-warning text-white mr-2 btn-sm "
+                    >
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button *ngIf="role !== 'Administrateur d\'allocation'"
+                    (click)="deleteSession(data.id, data.date_fin)" class="btn btn-danger btn-sm">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td><input [(ngModel)]="ref" (keyup)="searchRef()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="version" (keyup)="searchVersion()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="startD" (keyup)="searchStartDate()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="endD" (keyup)="searchEndDate()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="type" (keyup)="searchType()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="langue" (keyup)="searchLangue()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="place" (keyup)="searchPlace()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="state" (keyup)="searchState()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+                <td><input [(ngModel)]="trainer" (keyup)="searchTrainer()" class=" form-control form-control-sm" nz-input placeholder="Recherche" nzSize="default" /></td>
+              </tr>
+            </tfoot>
+          </nz-table>
+          <nz-skeleton [nzActive]="true" [nzLoading]="verifDataReady"></nz-skeleton>
+    </div>
+      </div>
+  </div>
+</div>
+
+</div>
+

@@ -1,0 +1,6 @@
+.custom-font {
+  font-size: .87rem !important;
+  }
+  ::ng-deep body .fc {
+    font-size: 1rem;
+  }

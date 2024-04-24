@@ -1,0 +1,18 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content">
+    <div class="container-fluid">
+<div class="pl-3 pt-3">
+  <nz-tabset nzSize="large" nzLinkRouter>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['planning-cours/list-planning-cours-inactive']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Allocations de formations</a>
+    </nz-tab>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['planning-examen/list-planning-examen-inactive']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Allocations des examens</a>
+    </nz-tab>
+  </nz-tabset>
+</div>
+    <router-outlet></router-outlet>
+    </div>
+    </section>
+</div>

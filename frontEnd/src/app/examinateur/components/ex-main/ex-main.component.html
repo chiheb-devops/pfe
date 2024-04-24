@@ -1,0 +1,106 @@
+<div class="container-fluid mt-4">
+  <!-- Small boxes (Stat box) -->
+  <div *ngIf="tableReady" class="row">
+    <div class="col-12 col-sm-4 col-md-4">
+      <div class="info-box">
+        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-calendar-check"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text"> Nombre de formations</span>
+          <span class="info-box-number">{{trainingnumber?.numbertraining}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-sm-4 col-md-4">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-calendar-alt"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Nombre de prochaines formations</span>
+          <span class="info-box-number">{{trainingnumber?.numbertrainingfeauture}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+
+    <!-- fix for small devices only -->
+    <div class="clearfix hidden-md-up"></div>
+
+    <div class="col-12 col-sm-4 col-md-4">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-calendar-plus"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Nombre de formations réalisées</span>
+          <span class="info-box-number">{{trainingnumber?.numbertrainingpast}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <!-- /.col -->
+  </div>
+  <div class="row" >
+    <nz-skeleton [nzActive]="true" [nzLoading]="verifDataReady"></nz-skeleton>
+  </div>
+
+  <!-- /.row -->
+  <!-- Main row -->
+  <div *ngIf="categoryReady" class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Rapport de récapitulation</h5>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="row">
+            <div *ngFor="let item of trainingnumberByCategory" class="col-md-6 px-3 dashbord-bottom border-right">
+              <p class="text-center">
+                <strong >{{item.nomcategorie}}</strong>
+              </p>
+
+              <div class="progress-group">
+                Nombre de formation
+                <span class="float-right"><b>{{item?.numbertraining}}</b></span>
+              </div>
+
+              <!-- /.chart-responsive -->
+            </div>
+            <!-- /.col -->
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- ./card-body -->
+
+
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <div class="row" >
+    <nz-skeleton [nzActive]="true" [nzLoading]="verifDataReadyCategory"></nz-skeleton>
+  </div>
+  <!-- /.row -->
+  <!-- /.row (main row) -->
+</div><!-- /.container-fluid -->
+
+

@@ -1,0 +1,18 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content">
+    <div class="container-fluid">
+<div class="pl-3 pt-3">
+  <nz-tabset nzSize="large" nzType="card" nzLinkRouter>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['training']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Calendrier des formations</a>
+    </nz-tab>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['examen']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Calendrier des examens</a>
+    </nz-tab>
+  </nz-tabset>
+</div>
+    <router-outlet></router-outlet>
+    </div>
+    </section>
+</div>

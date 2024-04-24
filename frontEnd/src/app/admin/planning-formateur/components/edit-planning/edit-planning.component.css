@@ -1,0 +1,19 @@
+@media(max-width:768px) {
+  .edit-title {
+    font-size: 1.5rem;
+    margin-top: 50px;
+    }
+    .form-control {
+      font-size: .8rem !important;
+    }
+
+}
+@media(min-width:768px) {
+  .add-title {
+    font-size: 2rem;
+    margin-top: 40px;
+    }
+  }
+nz-select, textarea {
+  width: 100%;
+}

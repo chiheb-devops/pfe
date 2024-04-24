@@ -1,0 +1,41 @@
+<div class="content-wrapper">
+
+    <section class="content">
+
+      <div class="container-fluid">
+        <div style="padding-top: 50px !important;" class=" text-right mt-5">
+            <button *ngIf="Results?.date_fin > dateYestarday" routerLink="/admin/list-session-cours-examen/session-cours/list-cours" class="btn btn-success mr-2">
+              <i class="fas fa-arrow-alt-circle-left"></i> Retour
+            </button>
+            <button *ngIf="Results?.date_fin < dateYestarday" routerLink="/admin/list-session-cours-examen-inactive/session-cours/list-cours-inactive" class="btn btn-success mr-2">
+              <i class="fas fa-arrow-alt-circle-left"></i> Retour
+            </button>
+          </div>
+          <div class="row mb-2 mt-4">
+            <div class="col-12 col-sm-6 col-md-12 col-lg-12 ">
+                <div class="card bg-light">
+
+                  <div class="card-body pt-5">
+                    <div class="row">
+                      <div class="col-12">
+                        <p class="lead text-muted"> Référence:   <b>{{Results?.ref_formation    }}</b>  </p>
+                        <p *ngIf="Results?.version_session" class="lead text-muted">Version:  <b> {{Results?.version_session    }}</b></p>
+                        <p class="lead text-muted">Durée:  <b> {{Results?.duree}}</b></p>
+                        <p *ngIf="Results?.affecter" class="lead text-muted">Instructeur :  <b> {{Results?.name  }}</b></p>
+                        <p class="lead text-muted">Date de début:  <b> {{Results?.date_debut   | date}}</b></p>
+                        <p class="lead text-muted">Date de fin:  <b>  {{Results?.date_fin   | date }} </b></p>
+                        <p class="lead text-muted">Type:  <b> {{Results?.type   | titlecase }}</b></p>
+                        <p class="lead text-muted">Langue:  <b>  {{Results?.langue   | titlecase }} </b></p>
+                        <p *ngIf="Results?.lieu" class="lead text-muted">Pays:  <b>  {{Results?.lieu   | titlecase }} </b></p>
+                        <p class="lead text-muted">Statut de session:  <b>  {{Results?.etat_session   | titlecase }} </b></p>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+          </div>
+      </div>
+  </section>
+</div>

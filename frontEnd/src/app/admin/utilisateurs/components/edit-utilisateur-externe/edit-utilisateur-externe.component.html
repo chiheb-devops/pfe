@@ -1,0 +1,144 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content">
+<div class="container-fluid">
+  <!--exemple modal-->
+  <ng-template #content let-c="close" let-d="dismiss">
+   <div class="modal-header">
+
+     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   <div class="modal-body">
+     <form (ngSubmit)="onSubmitcertif()" >
+       <div class=" mb-3">
+         <p  class="text-sm"><b>Certification: </b> </p>
+         <input type="file" name="file" #file  (change)="selectCertif(file.files)" multiple="multiple"  >
+
+       </div>
+           <!-- /.col -->
+           <div class="modal-footer">
+            <button  type="submit"  [nzLoading]="isLoadingCertification" nz-button nzType="primary" >Enregistrer</button>
+           </div>
+       </form>
+   </div>
+ </ng-template>
+                 <!-- end  exemple modal-->
+                       <!--exemple modal-->
+  <ng-template #contentCV let-c="close" let-d="dismiss">
+   <div class="modal-header">
+
+     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   <div class="modal-body">
+     <form (ngSubmit)="onSubmitcv()" >
+       <div class=" mb-3">
+         <p  class="text-sm"><b>Cv: </b> </p>
+         <input type="file" name="cv" #cv (change)="selectcv(cv.files)" multiple="multiple"  >
+       </div>
+           <!-- /.col -->
+           <div class="modal-footer">
+            <button  type="submit"  [nzLoading]="isLoadingCv" nz-button nzType="primary" >Enregistrer</button>
+           </div>
+       </form>
+   </div>
+ </ng-template>
+                 <!-- end  exemple modal-->
+ <div style="padding-top: 50px !important;" class=" text-right mt-5">
+     <button routerLink="/admin/utilisateurs/list-utilisateurs-externe" class="btn btn-success mr-2">
+       <i class="fas fa-arrow-alt-circle-left"></i> Retour
+     </button>
+   </div>
+ <div class="row mb-2">
+
+
+   <div class="col-sm-12  text-center mb-4">
+     <h1 class="edit-title"> Modifier un utilisateur</h1>
+   </div>
+     <div class="col-12 col-md-6 mx-auto">
+         <form  [formGroup]="editFormateurForm" (ngSubmit)="onSubmit()" >
+             <div class="input-group mb-3">
+                 <input type="text" formControlName="nom" [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" class="form-control" placeholder="Prénom">
+
+                 <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+                   <div *ngIf="f.nom.errors.required">Prénom est obligatoire</div>
+
+               </div>
+               </div>
+               <div class="input-group mb-3">
+                 <input type="text" formControlName="prenom" [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }" class="form-control" placeholder="Nom">
+
+                 <div *ngIf="submitted && f.prenom.errors" class="invalid-feedback">
+                   <div *ngIf="f.prenom.errors.required">Nom est obligatoire</div>
+
+               </div>
+               </div>
+             <div class="input-group mb-3">
+
+               <div class="input-group-prepend">
+                 <div class="input-group-text">
+                   <span >@</span>
+                 </div>
+               </div>
+               <input type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="form-control" placeholder="Email">
+               <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                 <div *ngIf="f.email.errors.required">Email est obligatoire</div>
+                 <div *ngIf="f.email.errors.email">Email est invalide</div>
+             </div>
+             </div>
+             <div class="input-group mb-3">
+               <div class="input-group-prepend">
+                 <div class="input-group-text">
+                   <span class="fas fa-phone" ></span>
+                 </div>
+               </div>
+                 <input type="number" formControlName="tele"   [ngClass]="{ 'is-invalid': submitted && f.tele.errors }" class="form-control" placeholder="Téléphone">
+
+                 <div *ngIf="submitted && f.tele.errors" class="invalid-feedback">
+                   <div *ngIf="f.tele.errors.required">Téléphone est obligatoire</div>
+               </div>
+               </div>
+               <div class="input-group mb-3">
+                 <input type="text" formControlName="fonction"   [ngClass]="{ 'is-invalid': submitted && f.fonction.errors }" class="form-control" placeholder="Fonction">
+                 <div *ngIf="submitted && f.fonction.errors" class="invalid-feedback">
+                   <div *ngIf="f.fonction.errors.required">Fonction est obligatoire</div>
+               </div>
+               </div>
+               <nz-radio-group (ngModelChange)="changeStatut($event)" formControlName="role">
+                <label nz-radio nzValue="Instructeur">Instructeur</label>
+                <label  nz-radio nzValue="Consultant">Consultant</label>
+                <label  nz-radio nzValue="Freelance">Freelance</label>
+              </nz-radio-group>
+              <div *ngIf="Result?.showDiv" >
+                <div class="d-flex justify-content-between" >
+                  <p  class="text-muted text-sm"><b>Certification: </b> </p> <button  (click)="open(content)" type="button" class="btn btn-info btn-sm ml-2">
+                    <i class="fas fa-plus"></i>
+                  </button>  </div>
+                  <div class=" mt-3 d-flex justify-content-between" *ngFor="let item of allCertif">
+                  <p   >  {{item?.nom_certif}}  </p> <button type="button"  class="btn btn-danger btn-sm" (click)="deleteCertif(item.nom_certif, item.email)" > <i class="fas fa-trash-alt" ></i></button></div>
+              </div>
+
+                <div class="my-2 d-flex justify-content-between">
+                <p  class="text-muted text-sm"><b>CV: </b></p> <button  (click)="openCV(contentCV)" type="button" class="btn btn-info btn-sm ml-2">
+                  <i class="fas fa-plus"></i>
+                </button> </div>
+                <div class=" mt-3 d-flex justify-content-between" *ngFor="let itemCV of allCv">
+                <p>  {{itemCV?.nom_cv}} </p> <button type="button" class="btn btn-danger btn-sm" (click)="deletedCv(itemCV.nom_cv, itemCV.email)" > <i  style="cursor: pointer;" class="fas fa-trash-alt" ></i> </button>
+                </div>
+             <div class="row">
+
+               <!-- /.col -->
+               <div class="col-12 my-4 text-center">
+                <button  type="submit"  [nzLoading]="isLoading" nz-button nzType="primary" nzBlock>Enregistrer</button>
+               </div>
+               <!-- /.col -->
+             </div>
+           </form>
+     </div>
+ </div>
+</div>
+  </section>
+</div>

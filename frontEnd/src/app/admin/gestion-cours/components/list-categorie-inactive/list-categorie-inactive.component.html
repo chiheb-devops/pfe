@@ -1,0 +1,54 @@
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid">
+      <div style="padding-top: 50px !important;" class="row">
+
+        <div class="col-12">
+          <div class="container">
+
+            <h4 class="mb-5">Catégories supprimées</h4>
+            <div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-inline mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+
+                      name="term"
+                      placeholder="Recherche"
+                      [(ngModel)]="term"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class=" table-responsive"  >
+                <nz-table *ngIf="tableReady" #nzTable [nzData]="listOfDisplayData |filter:term" [nzPageSize]="10" [nzNoResult]="'Pas de résultat'" nzTableLayout="fixed">
+                  <thead>
+                    <tr>
+                      <th nzAlign="center" >Nom de la catégorie</th>
+                      <th nzAlign="center" *ngIf="verifShowCategorie" >Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of nzTable.data">
+                      <td nzAlign="center" >{{ data.nom_categorie }}</td>
+                      <td nzAlign="center" *ngIf="verifShowCategorie" >
+                        <button (click)="categorieReturnActive(data.id, data.nom_categorie)"
+                          class="btn btn-warning text-white btn-sm" >
+                          <i class="fas fa-edit"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </nz-table>
+                <nz-skeleton [nzActive]="true" [nzLoading]="verifDataReady"></nz-skeleton>
+            </div>
+            </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+</div>
+

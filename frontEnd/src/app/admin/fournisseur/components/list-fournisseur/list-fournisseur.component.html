@@ -1,0 +1,68 @@
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="container">
+            <div class="text-right">
+              <button routerLink="/admin/fournisseur/add-fournisseur" class="btn btn-info mt-5 mb-4">
+                <i class="fas fa-plus"></i> Ajouter un Fournisseur
+              </button>
+            </div>
+            <h4 class="mb-5">Fournisseurs Actifs</h4>
+            <div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-inline mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+
+                      name="term"
+                      placeholder="Recherche"
+                      [(ngModel)]="term"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div >
+                <nz-table *ngIf="tableReady" #nzTable [nzData]="listOfDisplayData |filter:term"  [nzPageSize]="10" [nzNoResult]="'Pas de résultat'" nzTableLayout="fixed">
+                  <thead>
+                    <tr>
+                      <th nzAlign="center" >Nom du Fournisseur</th>
+                      <th nzAlign="center" >Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of nzTable.data">
+                  <td nzAlign="center" >{{ data.nom_fournisseur}}</td>
+                  <td nzAlign="center" >
+                    <button
+                    [routerLink]="['/admin/fournisseur/show-fournisseur', data.id]"
+                      class="btn btn-primary mr-2 btn-sm"
+                    >
+                      <i class="fas fa-info-circle"></i>
+                    </button>
+                      <button
+                      [routerLink]="['/admin/fournisseur/edit-fournisseur', data.id]"
+
+                        class="btn btn-warning text-white mr-2 btn-sm"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button (click)="deleteFournisseur(data.id)" class="btn btn-danger btn-sm">
+                        <i class="far fa-trash-alt"></i>
+                      </button>
+                  </td>
+                    </tr>
+                  </tbody>
+                </nz-table>
+                <nz-skeleton [nzActive]="true" [nzLoading]="verifDataReady"></nz-skeleton>
+            </div>
+            </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+</div>

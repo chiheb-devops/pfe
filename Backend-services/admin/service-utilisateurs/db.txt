@@ -1,0 +1,3 @@
+ // ALTER TABLE Utilisateurs ADD COLUMN examinateur varchar(250) DEFAULT 'non';
+ ALTER TABLE Utilisateurs ADD COLUMN roleAdmin varchar(250) DEFAULT 'Pas de rôle';
+ ALTER TABLE Utilisateurs ADD COLUMN statutUtilisateur varchar(250) DEFAULT 'interne';

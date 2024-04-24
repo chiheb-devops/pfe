@@ -1,0 +1,12 @@
+ tr th,  tr td {
+  font-size: .9rem;
+  }
+
+  @media(max-width:768px) {
+     tr th,  tr td {
+      font-size: .6rem;
+      }
+      .input-hidden{
+        display: none;
+      }
+  }

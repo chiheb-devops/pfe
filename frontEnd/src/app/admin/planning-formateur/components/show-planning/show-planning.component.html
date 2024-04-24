@@ -1,0 +1,42 @@
+<div class="content-wrapper">
+
+  <section class="content">
+
+    <div class="container-fluid">
+      <div style="padding-top: 50px !important;" class=" text-right mt-5">
+          <button *ngIf="Result?.date_fin > dateYestarday" routerLink="/admin/list-planning-cours-examen/planning-cours/list-planning-cours" class="btn btn-success mr-2">
+            <i class="fas fa-arrow-alt-circle-left"></i> Retour
+          </button>
+          <button *ngIf="Result?.date_fin < dateYestarday" routerLink="/admin/list-planning-cours-examen-inactive/planning-cours/list-planning-cours-inactive" class="btn btn-success mr-2">
+            <i class="fas fa-arrow-alt-circle-left"></i> Retour
+          </button>
+        </div>
+        <div class="row mb-2 mt-4">
+          <div class="col-12 col-sm-6 col-md-12 col-lg-12 ">
+              <div class="card bg-light">
+
+                <div class="card-body pt-5">
+                  <div class="row">
+                    <div class="col-12">
+                      <p class="lead text-muted"> Référence:   <b  >{{Result?.ref_formation    }}</b>  </p>
+                      <p *ngIf="Result?.version" class="lead text-muted"> Version:   <b  >{{Result?.version    }}</b>  </p>
+                      <p class="lead text-muted">Date de début:  <b> {{Result?.date_debut   | date}}</b></p>
+                      <p class="lead text-muted">Date de fin:  <b>  {{Result?.date_fin   | date }} </b></p>
+                      <p *ngIf="Result?.name" class="lead text-muted">Nom de l'instructeur:  <b> {{Result?.name    }}</b></p>
+                      <p class="lead text-muted">Statut d'instructeur: <b>  {{Result?.statut_f   | titlecase }} </b></p>
+                      <p class="lead text-muted">Nom du Fournisseur: <b>  {{Result?.nom_fournisseur  }} </b></p>
+                      <p *ngIf="Result?.address" class="lead text-muted">Adresse:  <b> {{Result?.address   }}</b></p>
+                      <p class="lead text-muted">Nbr estimé des participants:  <b>  {{Result?.nbr_participant }} </b></p>
+                      <p class="lead text-muted">Numéro du contact:  <b>  {{Result?.numero_for }} </b></p>
+                      <p class="lead text-muted">Mail du contact:  <b>  {{Result?.mail_contact }} </b></p>
+                      <p class="lead text-muted">Contact :  <b>  {{Result?.contact_for  }} </b></p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>

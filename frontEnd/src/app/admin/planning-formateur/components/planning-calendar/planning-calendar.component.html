@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <br>
+<div class="container">
+  <div class="modal " id="myModal" id="exampleModalScrollable" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalScrollableTitle" >{{ detail[0]?.ref_formation   }}</h4>
+          <button type="button" class="close" data-dismiss="modal" (click) = "hide()">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-10">
+              <p *ngIf="detail[0]?.version" class=" text-muted"> <span   >Version:</span> <b  > {{ detail[0]?.version }}</b></p>
+              <p  class=" text-muted"> <span   >Nom de l'instructeur:</span> <b  > {{ detail[0]?.name }}</b></p>
+              <p class=" text-muted"> <span   >Date de début:</span> <b  > {{ detail[0]?.date_debut  | date }}</b></p>
+              <p class="text-muted"><span  >Date de fin:</span>  <b> {{detail[0]?.date_fin   | date }}</b> </p>
+              <p class="text-muted"> <span  >Statut d'instructeur: </span>  <b>  {{detail[0]?.statut_f   | titlecase }} </b></p>
+              <p class="text-muted"> <span  >Statut de session: </span>  <b>  {{detail[0]?.etat_session   | titlecase }} </b></p>
+              <p class="text-muted"> <span   >Langue: </span>  <b>  {{detail[0]?.langue   | titlecase }} </b></p>
+              <p class="text-muted"><span >Type:</span>   <b>  {{detail[0]?.type   | titlecase }} </b></p>
+              <p *ngIf="detail[0]?.lieu" class="text-muted"><span  >Pays:</span>   <b>  {{detail[0]?.lieu   | titlecase }} </b></p>
+              <p *ngIf="detail[0]?.address_fournisseur" class="text-muted"><span  >Addresse:</span>    <b> {{detail[0]?.address_fournisseur  }}</b></p>
+              <p class="text-muted"><span  >Nbr estimé des participants:</span>   <b>  {{detail[0]?.nbr_participant }} </b></p>
+              <p class="text-muted"><span  >Numéro du contact:</span>   <b>  {{detail[0]?.numero_for }} </b></p>
+              <p class="text-muted"><span  >Mail du contact:</span>   <b>  {{detail[0]?.mail_contact }} </b></p>
+              <p class="text-muted"> <span >Contact :</span>   <b>  {{detail[0]?.contact_for  }} </b></p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click) = "hide()">Fermer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--end-->
+</div>
+  <full-calendar [options]="calendarOptions"></full-calendar>
+
+</div>

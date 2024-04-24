@@ -1,0 +1,37 @@
+<div class="container-fluid">
+
+             <ng-template #contentCV let-c="close" let-d="dismiss">
+              <div class="modal-header">
+
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form (ngSubmit)="onSubmitcv()" >
+                  <div class=" mb-3">
+                    <p  class="text-sm"><b>Cv: </b> </p>
+                    <input type="file" name="cv" #cv (change)="selectcv(cv.files)" multiple="multiple"  >
+                  </div>
+
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-dark" >Enregistrer</button>
+                      </div>
+                  </form>
+              </div>
+            </ng-template>
+
+
+<div class="col-12 mt-3" >
+  <div class="text-right mb-3 mr-5" >
+    <button  (click)="openCV(contentCV)" type="button" class="btn btn-info btn-sm ml-2">
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+  <p class="lead"
+  *ngFor="let itemCV of allCv" >  {{itemCV?.nom_cv}} <span>
+    <i (click)="downloadCv(itemCV.nom_cv, itemCV.email)" style="cursor: pointer;"
+    class="fas fa-download text-success ml-4" ></i> </span> <span class="ml-4"
+    *ngIf="itemCV.id_ajouter" > Ajoutée par {{itemCV.nom_ajouter}}</span> </p>
+</div>
+                            </div>

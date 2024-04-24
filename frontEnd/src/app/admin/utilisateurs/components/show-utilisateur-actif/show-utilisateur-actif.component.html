@@ -1,0 +1,46 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content">
+<div class="container-fluid">
+  <div style="padding-top: 50px !important;" class=" text-right mt-5">
+      <button *ngIf="Result?.statutUtilisateur === 'interne'" routerLink="/admin/utilisateurs/list-utilisateurs-actif" class="btn btn-success mr-2">
+        <i class="fas fa-arrow-alt-circle-left"></i> Retour
+      </button>
+      <button *ngIf="Result?.statutUtilisateur === 'externe'" routerLink="/admin/utilisateurs/list-utilisateurs-externe" class="btn btn-success mr-2">
+        <i class="fas fa-arrow-alt-circle-left"></i> Retour
+      </button>
+    </div>
+    <div class="row mb-2 mt-4">
+      <div class="col-12 col-sm-6 col-md-12 col-lg-12 ">
+          <div class="card bg-light">
+            <div class="card-header lead text-muted border-bottom-0">
+              {{Result?.fonction}}
+            </div>
+            <div class="card-body pt-0">
+              <div class="row">
+                <div class="col-7">
+                  <h2 class="lead"><b>{{Result?.prenom  }} {{Result?.nom }}</b></h2>
+                  <p class="text-muted lead text-sm"><b>Émail: </b>  {{Result?.email }} </p>
+                  <p class="text-muted lead text-sm"><b>Téléphone: </b>  {{Result?.tele }} </p>
+                  <p *ngIf="allCertif" class="text-muted lead text-sm"><b>Certification: </b></p>
+                  <p class=" lead" *ngFor="let item of allCertif" >  {{item?.nom_certif}} <span> <i (click)="downloadCertif(item.nom_certif, item.email)" style="cursor: pointer;"  class="fas fa-download text-success ml-4" ></i> </span>  <span class="ml-2" *ngIf="item.id_ajouter" > Ajoutée par {{item.nom_ajouter}}</span> </p>
+                  <p *ngIf="allCv" class="text-muted lead text-sm"><b>CV: </b></p>
+                  <p class="lead" *ngFor="let itemCV of allCv" >  {{itemCV?.nom_cv}} <span> <i (click)="downloadCv(itemCV.nom_cv, itemCV.email)" style="cursor: pointer;" class="fas fa-download text-success ml-4" ></i> </span> <span class="ml-2" *ngIf="itemCV.id_ajouter" > Ajoutée par {{itemCV.nom_ajouter}}</span> </p>
+                </div>
+
+              </div>
+            </div>
+            <div   *ngIf="Result?.statut === 'active'"  class="card-footer">
+              <div class="text-right">
+
+                <a (click)="changePassword()" class="btn btn-sm btn-primary">
+                  <i class="fas fa-sync-alt"></i> Changer mot de passe
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+  </section>
+</div>

@@ -1,0 +1,20 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content">
+    <div class="container-fluid">
+<div class="pl-3 pt-3">
+  <nz-tabset nzSize="large" nzLinkRouter>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['/admin/list-cours-examen/cours/list-cours']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >Cours</a>
+    </nz-tab>
+    <nz-tab>
+      <a *nzTabLink nz-tab-link [routerLink]="['examen/list-examen']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Examens</a>
+    </nz-tab>
+  </nz-tabset>
+</div>
+
+    <router-outlet></router-outlet>
+    </div>
+    </section>
+</div>
+

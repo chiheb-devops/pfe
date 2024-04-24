@@ -1,0 +1,78 @@
+<div class="content-wrapper">
+
+    <section class="content">
+
+      <div class="container-fluid">
+        <div style="padding-top: 50px !important;" class=" text-right mt-5">
+          <button routerLink="/admin/list-cours-examen/cours/list-cours" class="btn btn-success mr-2">
+            <i class="fas fa-arrow-alt-circle-left"></i> Retour
+          </button>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12 text-center mb-4">
+            <h1 class="add-title"  >Ajouter un cours</h1>
+          </div>
+            <div class="col-12 col-md-6 mx-auto">
+                <form  [formGroup]="CoursForm" (ngSubmit)="onSubmit()" >
+                    <div class="input-group mb-3">
+                        <input type="text" formControlName="ref_form" [ngClass]="{ 'is-invalid': submitted && f.ref_form.errors }" class="form-control" placeholder="Référence">
+
+                        <div *ngIf="submitted && f.ref_form.errors" class="invalid-feedback">
+                          <div *ngIf="f.ref_form.errors.required">référence  est obligatoire</div>
+                          <div *ngIf="f.ref_form.errors.trimError">référence est invalide</div>
+                          <div *ngIf="f.ref_form.errors.trimError2">référence est invalide</div>
+                      </div>
+                      </div>
+                      <div class="input-group mb-3">
+                        <input type="text" formControlName="designation" [ngClass]="{ 'is-invalid': submitted && f.designation.errors }" class="form-control" placeholder="Désignation">
+
+                        <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
+                          <div *ngIf="f.designation.errors.required">Désignation  est obligatoire</div>
+                          <div *ngIf="f.designation.errors.trimError">Désignation est invalide</div>
+                          <div *ngIf="f.designation.errors.trimError2">Désignation est invalide</div>
+                      </div>
+                      </div>
+                      <div class="input-group mb-3">
+
+                        <select class="form-control" formControlName="categorie"  [ngClass]="{ 'is-invalid': submitted && f.categorie.errors }"  name="" id="">
+                          <option value="" disabled selected hidden>Choisir une catégorie</option>
+                          <option [value]="item.nom_categorie" *ngFor="let item of categories"  >{{item.nom_categorie }}</option>
+                        </select>
+                        <div *ngIf="submitted && f.categorie.errors" class="invalid-feedback">
+                          <div *ngIf="f.categorie.errors.required">catégorie  est obligatoire</div>
+                      </div>
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <input type="number" formControlName="duree" [ngClass]="{ 'is-invalid': submitted && f.duree.errors }" class="form-control" placeholder="Durée">
+
+                        <div *ngIf="submitted && f.duree.errors" class="invalid-feedback">
+                          <div *ngIf="f.duree.errors.required">Durée est obligatoire</div>
+
+                      </div>
+                      </div>
+                      <div  class="input-group mb-3">
+                        <input type="text" formControlName="version" [ngClass]="{ 'is-invalid': submitted && f.version.errors }" class="form-control" placeholder="Version">
+
+                        <div *ngIf="submitted && f.version.errors" class="invalid-feedback">
+                          <div *ngIf="f.version.errors.required">version est obligatoire</div>
+                          <div *ngIf="f.version.errors.trimError">version est invalide</div>
+                          <div *ngIf="f.version.errors.trimError2">version est invalide</div>
+                      </div>
+                      </div>
+                    <div class="row">
+
+                      <!-- /.col -->
+                      <div class="col-12 mb-4 text-center">
+                        <button  type="submit"  [nzLoading]="isLoading" nz-button nzType="primary" nzBlock>Enregistrer</button>
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                  </form>
+            </div>
+        </div>
+      </div>
+  </section>
+</div>
+
+

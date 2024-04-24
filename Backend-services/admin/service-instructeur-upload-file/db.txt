@@ -1,0 +1,11 @@
+
+/*****************************/
+ALTER TABLE Formateur_certif ADD COLUMN id_ajouter int(11) DEFAULT null;
+ALTER TABLE Formateur_certif add CONSTRAINT `id_ajouter_fk`  FOREIGN KEY(id_ajouter) REFERENCES `Utilisateurs` (`id`) on UPDATE CASCADE on DELETE CASCADE;
+/*****************************/
+
+
+/*****************************/
+ALTER TABLE Formateur_cv ADD COLUMN id_ajouter int(11) DEFAULT null;
+ALTER TABLE Formateur_cv add CONSTRAINT `id_ajouter_fk_cv`  FOREIGN KEY(id_ajouter) REFERENCES `Utilisateurs` (`id`) on UPDATE CASCADE on DELETE CASCADE;
+/*****************************/

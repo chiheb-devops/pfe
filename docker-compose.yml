@@ -1,0 +1,156 @@
+version: "3"
+services:
+  mydb:
+    image: mariadb:10
+    volumes: 
+      - ./volumes:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: VdZDPFXDxpedA123
+    ports:
+      - 3307:3306  
+    networks:
+      - my-network
+  my-service-categorie:
+   build: ./Backend-services/admin/service-categorie
+   restart: always
+   ports: 
+     - 8083:8083  
+   depends_on: 
+    - mydb
+
+  my-service-cours:
+   build: ./Backend-services/admin/service-cours
+   restart: always
+   ports: 
+    - 8084:8084 
+   depends_on: 
+    - mydb  
+ 
+  my-service-dashboard:
+   build: ./Backend-services/admin/service-dashboard
+   restart: always
+   ports: 
+    - 8088:8088 
+   depends_on: 
+    - mydb  
+ 
+  my-service-dashboard-examens:
+   build: ./Backend-services/admin/service-dashboard-examens
+   restart: always
+   ports: 
+    - 8094:8094
+   depends_on: 
+    - mydb  
+
+  my-service-examens:
+   build: ./Backend-services/admin/service-examen
+   restart: always
+   ports: 
+    - 8091:8091  
+   depends_on: 
+    - mydb  
+    
+  my-service-fournisseur:
+   build: ./Backend-services/admin/service-fournisseur
+   restart: always
+   ports: 
+    - 8086:8086
+   depends_on: 
+    - mydb  
+    
+  my-service-instructeur:
+   build: ./Backend-services/admin/service-instructeur
+   restart: always
+   ports: 
+    - 8081:8081
+   depends_on: 
+    - mydb  
+    
+  my-service-instructeur-upload:
+   build: ./Backend-services/admin/service-instructeur-upload-file
+   restart: always
+   ports: 
+    - 8082:8082 
+   depends_on: 
+    - mydb  
+
+  my-service-planning-examens:
+    build: ./Backend-services/admin/service-planning-examens-instructeur
+    restart: always
+    ports: 
+    - 8093:8093
+    depends_on: 
+    - mydb  
+    
+  my-service-planning-cours:
+    build: ./Backend-services/admin/service-planning-instructeur
+    restart: always
+    ports: 
+     - 8087:8087
+    depends_on: 
+    - mydb  
+    
+  my-service-sessions-cours:
+    build: ./Backend-services/admin/service-session
+    restart: always
+    ports: 
+     - 8085:8085 
+    depends_on: 
+    - mydb  
+    
+  my-service-sessions-examens:
+    build: ./Backend-services/admin/service-session-examens
+    restart: always
+    ports: 
+     - 8092:8092   
+    depends_on: 
+    - mydb   
+
+  my-service-utilisateurs:
+    build: ./Backend-services/admin/service-utilisateurs
+    restart: always
+    ports: 
+     - 8096:8096
+    depends_on: 
+     - mydb  
+    
+  my-service-compte-examinateur:
+   build: ./Backend-services/examinateur/service-examinateur
+   restart: always
+   ports: 
+    - 8095:8095 
+   depends_on: 
+    - mydb  
+
+  my-service-compte-instructeur:
+   build: ./Backend-services/instructeur/service-instucteur
+   restart: always
+   ports: 
+    - 8089:8089
+   depends_on: 
+    - mydb  
+      
+
+  my-service-auth:
+    build: ./Backend-services/service-auth
+    restart: always
+    ports: 
+      - 8090:8090
+    depends_on: 
+      - mydb  
+    networks:
+      - my-network
+
+  my-service-frontend:
+    build: ./frontEnd
+    restart: always
+    ports:
+      - 4201:4200
+    depends_on:
+      - mydb  
+    networks:
+      - my-network
+
+networks:
+  my-network:

@@ -1,0 +1,53 @@
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid">
+      <div style="padding-top: 50px !important;" class="row">
+        <div class="col-12">
+          <div class="container">
+
+            <h4 class="mb-5">Fournisseurs Inactifs</h4>
+            <div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-inline mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+
+                      name="term"
+                      placeholder="Recherche"
+                      [(ngModel)]="term"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div >
+                <nz-table *ngIf="tableReady" #nzTable [nzData]="listOfDisplayData |filter:term"  [nzPageSize]="10" [nzNoResult]="'Pas de résultat'" nzTableLayout="fixed">
+                  <thead>
+                    <tr>
+                      <th nzAlign="center" >Nom du Fournisseur</th>
+                      <th nzAlign="center" >Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of nzTable.data">
+                  <td nzAlign="center" >{{ data.nom_fournisseur}}</td>
+                  <td nzAlign="center" >   <button (click)="FournisseurReturnActive(data.id)"
+                    class="btn btn-warning text-white btn-sm"
+                  >
+                    <i class="fas fa-edit"></i>
+                  </button></td>
+                    </tr>
+                  </tbody>
+                </nz-table>
+                <nz-skeleton [nzActive]="true" [nzLoading]="verifDataReady"></nz-skeleton>
+            </div>
+            </div>
+
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </section>
+</div>

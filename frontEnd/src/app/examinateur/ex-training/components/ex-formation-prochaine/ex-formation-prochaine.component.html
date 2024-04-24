@@ -1,0 +1,92 @@
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid">
+      <div style="padding-top: 50px !important;" class="row">
+        <div class=" col-12">
+          <div class="container">
+            <ng-template #content let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h6 class="modal-title  text-muted " id="modal-basic-title">{{ detail[0].ref_formation   }}</h6>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="card info-box">
+                  <div class="card-body ">
+                    <div class="row">
+                      <div class="col-10">
+                        <p *ngIf="detail[0].version" class=" text-muted"> <span   >Version:</span> <b  > {{ detail[0].version }}</b></p>
+                        <p class=" text-muted"> <span   >Date de début:</span> <b  > {{ detail[0].date_debut   }}</b></p>
+                        <p class="text-muted"><span  >Date de fin:</span>  <b> {{detail[0].date_fin  }}</b> </p>
+                        <p class="text-muted"> <span  >Statut: </span>  <b>  {{detail[0].statut_f   | titlecase }} </b></p>
+                        <p class="text-muted"> <span  >Statut de session: </span>  <b>  {{detail[0].etat_session   | titlecase }} </b></p>
+                        <p class="text-muted"> <span   >Langue: </span>  <b>  {{detail[0].langue   | titlecase }} </b></p>
+                        <p class="text-muted"><span >Type:</span>   <b>  {{detail[0].type   | titlecase }} </b></p>
+                        <p *ngIf="detail[0].lieu" class="text-muted"><span  >Pays:</span>   <b>  {{detail[0].lieu   | titlecase }} </b></p>
+                        <p *ngIf="detail[0].address" class="text-muted"><span  >Addresse:</span>    <b> {{detail[0].address  }}</b></p>
+                        <p class="text-muted"><span  >Nbr estimé des participants:</span>   <b>  {{detail[0].nbr_participant }} </b></p>
+                        <p class="text-muted"><span  >Numéro du contact:</span>   <b>  {{detail[0].numero_for }} </b></p>
+                        <p class="text-muted"><span  >Mail  du contact:</span>   <b>  {{detail[0].mail_contact }} </b></p>
+                        <p class="text-muted"> <span >Contact :</span>   <b>  {{detail[0].contact_for  }} </b></p>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <h4 class="mb-5">Prochaines Formations</h4>
+            <div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-inline mb-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="term"
+                      placeholder="Recherche"
+                      [(ngModel)]="term"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <nz-table *ngIf="tableReady" #nzTable [nzData]="listOfDisplayData |filter:term" [nzScroll]="{ x: '600px'}"  [nzPageSize]="10" [nzNoResult]="'Pas de résultat'" >
+                  <thead  >
+                    <tr  >
+                      <th>Référence</th>
+                      <th>Version</th>
+                      <th>Date</th>
+                      <th>Statut</th>
+                      <th>Type</th>
+                      <th>Détails</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of nzTable.data">
+                      <td>{{ data.ref_formation   }}</td>
+                      <td>{{ data.version  }}</td>
+                      <td>{{ data.date_debut   }} -- {{ data.date_fin  }}</td>
+                      <td>{{ data.statut_f  | titlecase }}</td>
+                      <td>{{ data.type | titlecase }}</td>
+                      <td >
+                        <button
+                          class="btn btn-info text-white btn-sm" (click)="open(content, data.id)"
+                        >
+                          <i class="fas fa-info-circle"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </nz-table>
+                <nz-skeleton [nzActive]="true" [nzLoading]="verifDataReady"></nz-skeleton>
+            </div>
+            </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+</div>
+

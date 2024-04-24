@@ -1,0 +1,18 @@
+@media(max-width:768px) {
+  .dashbord-bottom {
+    margin-bottom: 32px;
+     }
+     .card-title, .progress-group, .btn-tool {
+  font-size: .7rem !important;
+  line-height: 2.5;
+     }
+    }
+   .alignself-global .col-md-6 {
+    align-self: center;
+  }
+  .info-box{
+    min-height: 85px;
+  }
+  .card-title, .progress-group, .btn-tool {
+    font-size: .9rem !important;
+       }
