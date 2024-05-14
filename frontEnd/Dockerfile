@@ -8,8 +8,6 @@ RUN npm install
 
 COPY /frontEnd/. .
 
-RUN npm run build
-
 EXPOSE 4200
 
 CMD ["npm", "start"]
