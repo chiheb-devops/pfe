@@ -2,7 +2,7 @@ FROM node:14
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY Backend-services/service-auth/package*.json ./
 
 RUN npm install
 
