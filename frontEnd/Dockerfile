@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY /frontEnd/package*.json ./
 
+Run rm -rf node_modules/
+
 RUN npm install
 
 COPY /frontEnd/. .
