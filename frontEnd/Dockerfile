@@ -2,11 +2,11 @@ FROM node:12.11.1
 
 WORKDIR /app
 
-COPY /frontEnd/package*.json ./
+COPY package*.json ./
 
 RUN npm install
 
-COPY /frontEnd ./
+COPY . ./
 
 RUN npm run build
 
