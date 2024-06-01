@@ -2,11 +2,11 @@ FROM node:14
 
 WORKDIR /app
 
-COPY Backend-services/service-auth/package*.json ./
+COPY package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY . ./
 
 EXPOSE 8090
 
