@@ -1,3 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+      - name: mariadb
+        image: quay.io/your-username/database:latest
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "VdZDPFXDxpedA123"
+        - name: MYSQL_DATABASE
+          value: "management"
+        - name: MYSQL_USER
+          value: "ubuntu"
+        - name: MYSQL_PASSWORD
+          value: "VdZDPFXDxpedA123"
+        - name:  MARIADB_ROOT_PASSWORD
+          value: my-secret-pw
 ---
 apiVersion: v1
 kind: Service
