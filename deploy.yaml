@@ -19,13 +19,15 @@ spec:
         - containerPort: 3306
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "root_password"
+          value: "VdZDPFXDxpedA123"
         - name: MYSQL_DATABASE
-          value: "your_database"
+          value: "management"
         - name: MYSQL_USER
-          value: "user"
+          value: "ubuntu"
         - name: MYSQL_PASSWORD
-          value: "password"
+          value: "VdZDPFXDxpedA123"
+        - name:  MARIADB_ROOT_PASSWORD
+          value: my-secret-pw
 ---
 apiVersion: apps/v1
 kind: Deployment
