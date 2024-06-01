@@ -4,9 +4,9 @@ FROM docker.io/mariadb:10
 # Set environment variables for MariaDB
 ENV MYSQL_ROOT_PASSWORD=VdZDPFXDxpedA123
 ENV MYSQL_DATABASE=management
-ENV MYSQL_USER=root
+ENV MYSQL_USER=ubuntu
 ENV MYSQL_PASSWORD=VdZDPFXDxpedA123
-
+ENV MARIADB_ROOT_PASSWORD=my-secret-pw
 # Expose the default MariaDB port
 EXPOSE 3306
 
