@@ -9,16 +9,15 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the source code from GitHub
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-credentials', url: 'https://github.com/chiheb-devops/pfe.git']])
-            }
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-credentials', url: 'https://github.com/chiheb-devops/pfe.git']])            }
         }
 
                    stage('build') {
             steps {
-                sh 'podman build -t ${REGISTRY}/DB:latest ~/pfe/volumes'
-                sh 'podman build -t ${REGISTRY}/front:latest ~/pfe/frontEnd'
-                sh 'podman build -t ${REGISTRY}/auth:latest ~/pfe/Backend-services/service-auth '
-                sh 'podman build -t ${REGISTRY}/user:latest ~/pfe/Backend-services/admin/service-utilisateurs'
+                sh 'podman build -t ${REGISTRY}/mydb:v1.0 ~/pfe/volumes'
+                sh 'podman build -t ${REGISTRY}/front:v1.0 ~/pfe/frontEnd'
+                sh 'podman build -t ${REGISTRY}/auth:v1.0 ~/pfe/Backend-services/service-auth '
+                //sh 'podman build -t ${REGISTRY}/user:v1.0 ~/pfe/Backend-services/admin/service-utilisateurs'
                
             }
         }
@@ -29,10 +28,10 @@ pipeline {
                     def password = credentialsId('quay-io-credentials-id', 'password') 
                     withCredentials([usernamePassword(credentialsId: 'quay-io-credentials-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh "podman login -u $USERNAME -p $PASSWORD quay.io"
-                        sh 'podman push ${REGISTRY}/DB:latest'
-                        sh 'podman push ${REGISTRY}/front:latest'
-                        sh 'podman push ${REGISTRY}/auth:latest'
-                        sh 'podman push ${REGISTRY}/user:lates'
+                        sh 'podman push ${REGISTRY}/mydb:v1.0'
+                        sh 'podman push ${REGISTRY}/front:v1.0'
+                        sh 'podman push ${REGISTRY}/auth:v1.0'
+                       // sh 'podman push ${REGISTRY}/user:v1.0'
                     }
                 }
             }
@@ -46,6 +45,9 @@ pipeline {
     triggers {
         // Trigger the pipeline whenever there's a commit to GitHub
         githubPush()
+    } triggers {
+        // clean worksapce
+        cleanWs()
     }
 }
 }
