@@ -45,7 +45,7 @@ pipeline {
     triggers {
         // Trigger the pipeline whenever there's a commit to GitHub
         githubPush()
-    } triggers {
+    } clean {
         // clean worksapce
         cleanWs()
     }
