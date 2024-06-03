@@ -1,40 +1,100 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: PersistentVolume
 metadata:
-  name: mariadb
+  name: mydb-pv
 spec:
-  replicas: 1
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mydb-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mydb
+spec:
+  replicas: 1  
   selector:
     matchLabels:
-      app: mariadb
+      app: mydb
   template:
     metadata:
       labels:
-        app: mariadb
+        app: mydb
     spec:
       containers:
-      - name: mariadb
-        image: quay.io/your-username/database:latest
+      - name: mydb
+        image: quay.io/med_chiheb/mydb:v1.0
+        volumeMounts:
+        - name: mydb-data
+          mountPath: /var/lib/mysql
         ports:
         - containerPort: 3306
         env:
-        - name: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_ROOT_PASSWORD  
           value: "VdZDPFXDxpedA123"
-        - name: MYSQL_DATABASE
+        - name: MARIADB_PASSWORD  
+          value: "VdZDPFXDxpedA123" 
+        - name: MYSQL_DATABASE  
           value: "management"
-        - name: MYSQL_USER
-          value: "ubuntu"
-        - name: MYSQL_PASSWORD
-          value: "VdZDPFXDxpedA123"
-        - name:  MARIADB_ROOT_PASSWORD
-          value: my-secret-pw
+ 
+        - name: MYSQL_USER 
+          value: "root"
+      volumes:
+      - name: mydb-data
+        persistentVolumeClaim:
+          claimName: mydb-pvc   
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+spec:
+  replicas: 1  
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+      - name: auth
+        image: quay.io/med_chiheb/auth:v1.0
+        ports:
+        - containerPort: 8090
+        env:
+          - name: DB_HOST  # Define environment variable for database connection
+            value: mydb-service.default.svc.cluster.local
+          - name: DB_PASS  
+            value: "VdZDPFXDxpedA123"
+
+          - name: DB_NAME  
+            value: "management"
+          - name: DB_USER 
+            value: "root"
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: front
 spec:
-  replicas: 1
+  replicas: 1  
   selector:
     matchLabels:
       app: front
@@ -45,9 +105,12 @@ spec:
     spec:
       containers:
       - name: front
-        image: quay.io/med_chiheb/front:latest
+        image: quay.io/med_chiheb/front:v1.0
         ports:
         - containerPort: 4200
+        env:
+          - name: DB_HOST
+            value: mydb-service.default.svc.cluster.local
 ---
 apiVersion: v1
 kind: Service
@@ -57,73 +120,19 @@ spec:
   selector:
     app: front
   ports:
-    - protocol: TCP
-      port: 4200
-      targetPort: 4200
+  - protocol: TCP
+    port: 4200
+    targetPort: 4200
   type: ClusterIP
-  ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: authentificat
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: authentificat
-  template:
-    metadata:
-      labels:
-        app: authentificat
-    spec:
-      containers:
-      - name: authentificat
-        image: quay.io/med_chiheb/auth:latest
-        ports:
-        - containerPort: 8090
+
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-service
+  name: mydb-service
 spec:
   selector:
-    app: authentificat
+    app: mydb
   ports:
-    - protocol: TCP
-      port: 8090
-      targetPort: 8090
-  type: ClusterIP
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: user
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: user
-  template:
-    metadata:
-      labels:
-        app: user
-    spec:
-      containers:
-      - name: user
-        image: quay.io/med_chiheb/user:latest
-        ports:
-        - containerPort: 8096
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: user-service
-spec:
-  selector:
-    app: user
-  ports:
-    - protocol: TCP
-      port: 8096
-      targetPort: 8096
-  type: ClusterIP
+  - protocol: TCP
