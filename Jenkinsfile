@@ -15,8 +15,8 @@ pipeline {
                    stage('build') {
             steps {
                 //sh 'podman build -t ${REGISTRY}/mydb:v1.0 ~/pfe/volumes'
-                sh 'sudo podman build -t ${REGISTRY}/front:v1,0 ~/pfe/frontEnd'
-                sh 'sudo podman build -t ${REGISTRY}/auth:v1,0 ~/pfe/Backend-services/service-auth '
+                sh 'sudo podman build -t ${REGISTRY}/front:v1,0 /pfe/frontEnd'
+                sh 'sudo podman build -t ${REGISTRY}/auth:v1,0 /pfe/Backend-services/service-auth '
           
                
             }
@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Redeploy to Kubernetes with kubectl') {
             steps {
-                sh 'sudo kubectl apply -f ~/pfe/deploy.yaml'
+                sh 'sudo kubectl apply -f /pfe/deploy.yaml'
             }
         }
     
