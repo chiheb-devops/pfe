@@ -24,8 +24,6 @@ pipeline {
         stage('Push Image to Quay.io') {
             steps {
                 script {
-                    def username = 'med_chiheb' 
-                    def password = credentialsId('quay-io-credentials-id', 'password') 
                     withCredentials([usernamePassword(credentialsId: 'quay-io-credentials-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh "sudo podman login -u $USERNAME -p $PASSWORD quay.io"
                         
