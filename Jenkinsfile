@@ -15,7 +15,7 @@ pipeline {
                    stage('build') {
             steps {
                 //sh 'podman build -t ${REGISTRY}/mydb:v1.0 ~/pfe/volumes'
-                sh ' podman build -t ${REGISTRY}/front:v10 ~/pfe/frontEnd/'
+                sh ' sudo podman build -t ${REGISTRY}/front:v10 ~/pfe/frontEnd/'
                 sh ' podman build -t ${REGISTRY}/auth:v10 ~/pfe/Backend-services/service-auth/ '
           
                
