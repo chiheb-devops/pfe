@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Redeploy to Kubernetes with kubectl') {
             steps {
-                 sh 'kubectl delete -f  ~/pfe/deployments/"*.yaml" '
+                 sh 'kubectl apply -f  ~/pfe/deployments/"*.yaml" '
             }
         }
     
