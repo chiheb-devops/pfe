@@ -24,7 +24,7 @@ pipeline {
         stage('Push Image to Quay.io') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'quay-io-credentials-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'quay-io-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh "sudo podman login -u $USERNAME -p $PASSWORD quay.io"
                         
                         sh ' sudo podman push ${REGISTRY}/front:v10'
