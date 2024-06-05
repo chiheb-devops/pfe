@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'quay-io-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh "podman login -u $USERNAME -p $PASSWORD quay.io"
+                        sh "sudo podman login -u $USERNAME -p $PASSWORD quay.io"
                         
                         sh '  podman push ${REGISTRY}/pfe-app:v10'
                         sh '  podman push ${REGISTRY}/auth:v10'
