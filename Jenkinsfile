@@ -15,8 +15,8 @@ pipeline {
                    stage('build') {
             steps {
                 //sh 'podman build -t ${REGISTRY}/mydb:v1.0 ~/pfe/volumes'
-                sh ' sudo podman build -t ${REGISTRY}/front:v10 ~/pfe/frontEnd/'
-                sh ' sudo podman build -t ${REGISTRY}/auth:v10 ~/pfe/Backend-services/service-auth/ '
+                sh ' podman build -t ${REGISTRY}/front:v10 ~/pfe/frontEnd/'
+                sh ' podman build -t ${REGISTRY}/auth:v10 ~/pfe/Backend-services/service-auth/ '
           
                
             }
@@ -25,10 +25,10 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'quay-io-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh "sudo podman login -u $USERNAME -p $PASSWORD quay.io"
+                        sh "podman login -u $USERNAME -p $PASSWORD quay.io"
                         
-                        sh ' sudo podman push ${REGISTRY}/pfe-app:v10'
-                        sh ' sudo podman push ${REGISTRY}/auth:v10'
+                        sh '  podman push ${REGISTRY}/pfe-app:v10'
+                        sh '  podman push ${REGISTRY}/auth:v10'
                       
                     }
                 }
