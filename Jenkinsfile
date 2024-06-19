@@ -36,7 +36,8 @@ pipeline {
         }
         stage('deploy to Kubernetes with kubectl') {
             steps {
-                 sh 'kubectl apply -f deployments/ '
+                 sh ' git clone https://github.com/chiheb-devops/deployments.git '
+                 sh 'kubectl apply -Rf deployments/ '
             }
         }
     
